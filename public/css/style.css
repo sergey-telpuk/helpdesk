@@ -1,0 +1,138 @@
+/* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.2;
+}
+ol {
+	padding-left: 1.4em;
+	list-style: decimal;
+}
+ul {
+	padding-left: 1.4em;
+	list-style: square;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+*{
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html{
+
+}
+
+body{
+	width: 1000px;
+	background-color: rgba(255, 212, 192, 0.94);
+	margin: 15px  auto;
+}
+
+nav.widjet{
+	width: 25%;
+	padding: 10px 10px 10px 20px;
+	border-top: 15px #ff8c53 groove;
+	background-color: white;
+	float: left;
+
+}
+.widjet ul.menu{
+	list-style:none;
+
+}
+
+.widjet ul.menu li{
+	padding-top: 6px;
+}
+.profile{
+	width: 100%;
+}
+.profile ul{
+	padding: 10px;
+	float: right;
+}
+
+.clear{
+	clear: both;
+}
+
+.profile ul li{
+	border: 1px dashed;
+	padding: 6px;
+	list-style:none;
+	display: inline;
+}
+.profile ul:nth-child(0){
+	border-right: none;
+}
+
+section.content{
+	margin-left: 10px;
+	background-color: white;
+	padding: 10px 10px 10px 20px;
+	width: 70%;
+	float: right;
+}
+
+.no-page{
+	height: 700px;
+	background-position: center;
+	margin: 0 auto;
+	background-image: url("../../../public/img/no_page.jpg");
+	background-repeat: no-repeat;
+}
+div.authorization{
+	text-align: center;
+	background-color: white;
+
+}
+.subform{
+	margin: 0 auto;
+	font-size: 1.2em;
+	color: black;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+.subform label{
+	display: inline-block;
+	width: 100px;
+	vertical-align: top;
+	text-align: right;
+	margin-right: 30px;
+	font-weight: bold;
+	color: black;
+	padding-bottom: 20px;
+}
+.authorization h1{
+	margin: 0 auto 50px;
+	width: 400px;
+	border-bottom: 1px black dashed;
+	padding-top: 50px;
+	padding-bottom: 10px;
+	font-size: 1.6em;
+}
+
+
+.subform input[type='submit']{
+	margin-left: 220px;
+	margin-bottom: 220px;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	border: none;
+}
+
+
