@@ -34,17 +34,19 @@ table {
 }
 
 html{
-
+	background-color: white;
 }
 
 body{
 	font-size: 20px;
 	width: 1000px;
-	background-color: rgba(255, 212, 192, 0.94);
 	margin: 15px  auto;
+	background-color: rgba(90, 86, 15, 0.47);
 }
 .wrapper{
-	position: relative;
+	border-top: 15px #ff8c53 groove;
+	width: 100%;
+
 }
 
 nav.widjet{
@@ -53,8 +55,7 @@ nav.widjet{
 	float: left;
 }
 
-section.sidebar{
-	border-top: 15px #ff8c53 groove;
+div.sidebar{
 	width: 100%;
 }
 .widjet ul{
@@ -80,6 +81,17 @@ section.sidebar{
 	float: right;
 }
 
+.bid_management ul li{
+	list-style: none;
+	display: inline-block;
+}
+
+.bid_management ul li a{
+	text-decoration: none;
+	border-right: none;
+	padding: 10px;
+	border: 1px black dashed;
+}
 
 .clear{
 	clear: both;
@@ -101,7 +113,7 @@ section.sidebar{
 	padding: 10px;
 }
 
-section.content{
+div.content{
 	margin-top: 10px;
 	margin-right: 10px;
 	padding: 10px 10px 10px 20px;
@@ -224,8 +236,7 @@ div.authorization h3{
 	padding: 5px;
 }
 .bid{
-	border: 1px #ff8c53 solid;
-	padding: 10px;
+	margin-top: 10px;
 }
 
 .statuss p{
