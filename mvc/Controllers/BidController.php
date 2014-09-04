@@ -3,7 +3,7 @@
 
 		public function createAction(){
 			$view = new View();
-			return $view->render('index/index');
+			return $view->render('bid/create');
 		}
 
 

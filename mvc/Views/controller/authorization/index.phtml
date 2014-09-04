@@ -1,18 +1,18 @@
 <div class="authorization">
 	<header>
 		<h1>Авторизация</h1>
-		<?php if($data['message']):?>
+		<?php if( isset($data['message']) && $data['message'] === true):?>
 			<h3>Неправильный логин или пароль!</h3>
 		<?php endif; ?>
 	</header>
-	<form class="subform"  method="post" action="check">
+	<form class="subform"  method="post" action="check" novalidate="">
 		<p>
 			<label for="login">Логин</label>
-			<input type="text" name="login" id="login">
+			<input type="email" placeholder="email" name="login" id="login">
 		</p>
 		<p>
 			<label for="password">Пароль</label>
-			<input type="mail" name="password" id="password">
+			<input type="password" name="password" placeholder="пароль" id="password">
 		</p>
 		<p>
 			<input type="submit" name="authorization" value="войти">

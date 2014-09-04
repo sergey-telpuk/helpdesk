@@ -5,8 +5,13 @@
 	<link rel="stylesheet" type="text/css"  href="http://<?=HOST."/".DIR_PROJECT."/public/"?>/css/style.css">
 </head>
 <body>
-	<?=$helpers_menu?>
-	<?=$content?>
+<section class="sidebar">
+	<?=$this->_helpers_menu?>
+</section>
+<section class="content">
+	<?=$this->_content?>
+</section>
+
 </body>
 <script type="text/javascript" src="<?=HOST?>/js/jquery-2.0.0.min.js"></script>
 </html>

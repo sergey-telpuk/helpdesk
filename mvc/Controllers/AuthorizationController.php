@@ -2,7 +2,7 @@
 	class AuthorizationController extends IController {
 		public function indexAction(){
 			$view = new View();
-			return $view->render('authorization/index');
+			return $view->render('authorization/index', ['helpers' => false]);
 
 		}
 
@@ -20,7 +20,7 @@
 
 		public function messageAction(){
 			$view = new View();
-			return $view->render('authorization/index', ['message'=>true]);
+			return $view->render('authorization/index', ['helpers' => false ,'message'=>true]);
 		}
 
 	}

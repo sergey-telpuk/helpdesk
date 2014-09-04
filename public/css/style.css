@@ -38,55 +38,72 @@ html{
 }
 
 body{
+	font-size: 20px;
 	width: 1000px;
 	background-color: rgba(255, 212, 192, 0.94);
 	margin: 15px  auto;
 }
 
 nav.widjet{
-	width: 25%;
-	padding: 10px 10px 10px 20px;
-	border-top: 15px #ff8c53 groove;
-	background-color: white;
 	float: left;
-
-}
-.widjet ul.menu{
-	list-style:none;
-
+	width: 90%;
 }
 
-.widjet ul.menu li{
-	padding-top: 6px;
-}
-.profile{
+section.sidebar{
+	border: 2px black solid;
+	/*border-top: 15px #ff8c53 groove;*/
 	width: 100%;
 }
-.profile ul{
-	padding: 10px;
-	float: right;
+.widjet ul.menu li{
+	list-style:none;
+	display: inline-block;
+
 }
+
+
+.widjet ul.menu li a{
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	background-color: #ff8c53;
+	font-size: 0.7em;
+	text-transform: uppercase;
+	text-decoration: none;
+	display: inline;
+}
+
+.profile{
+	width: 5%;
+	float: left;
+}
+
 
 .clear{
 	clear: both;
 }
-
-.profile ul li{
-	border: 1px dashed;
-	padding: 6px;
-	list-style:none;
-	display: inline;
+.profile ul{
+	list-style: none;
 }
-.profile ul:nth-child(0){
-	border-right: none;
+
+.profile ul .out{
+	letter-spacing: 1px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	background-color: #ff8c53;
+	font-size: 0.7em;
+	text-transform: uppercase;
+	text-decoration: none;
+	padding: 10px;
 }
 
 section.content{
-	margin-left: 10px;
-	background-color: white;
+	margin-top: 10px;
+	margin-right: 10px;
 	padding: 10px 10px 10px 20px;
-	width: 70%;
-	float: right;
+	width: 100%;
+	float: left;
 }
 
 .no-page{
@@ -138,13 +155,162 @@ div.authorization h3{
 	font-size: 1.6em;
 }
 
+.subform input[type='text']{
+	height: 30px;
+	padding: 5px;
+}
+
+.subform input[type='email']{
+	height: 30px;
+	padding: 5px;
+}
+
+.subform input[type='password']{
+	height: 30px;
+	padding: 5px;
+}
+
 
 .subform input[type='submit']{
-	margin-left: 220px;
-	margin-bottom: 220px;
+	outline: none;
+	cursor: pointer;
+	width: 100px;
+	margin-left: 200px;
+	margin-bottom: 100px;
+	padding: 5px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: white;
+	background-color: #ff8c53;
 	font-size: 0.9em;
 	text-transform: uppercase;
-	border: none;
+	border: 1px #ff8c53 hidden;
 }
+
+/* bid */
+.reqired{
+	margin-left: 3px;
+	color: red;
+}
+.new_bid{
+	width: 80%;
+	float: left;
+	background-color: white;
+	padding: 10px;
+	border: 1px #ff8c53 solid;
+}
+
+.new_bid header{
+	margin-bottom: 10px;
+}
+
+.bid p{
+	margin-top: 10px;
+}
+#name{
+	margin-top: 10px;
+	display: block;
+	width: 100%;
+	padding: 5px;
+}
+
+#description{
+	display: block;
+	margin-top: 10px;
+	width: 100%;
+	padding: 5px;
+}
+.bid{
+	border: 1px #ff8c53 solid;
+	padding: 10px;
+}
+
+.statuss p{
+	margin-top: 20px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.statuss p select{
+	height: 25px;
+	width: 150px;
+}
+.statuss p label{
+	margin-bottom: 5px;
+	display: block;
+}
+
+.file{
+	border-top: 2px groove;
+	border-bottom: 2px groove;
+	margin-top: 40px;
+	padding-left: 30px;
+	padding-top: 15px;
+	padding-bottom: 50px;
+}
+.file label{
+	text-align: right;
+	display: block;
+	width: 100px;
+	float: left;
+}
+
+.file .right_file{
+	margin-left: 30px;
+	display: block;
+	float: left;
+}
+.comments{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.comments label{
+	width: 100%;
+	display: block;
+}
+.comments input{
+	margin-top: 10px;
+	width: 100%;
+	height: 60px;
+	display: block;
+}
+
+.saveBid input[type='submit']{
+	cursor: pointer;
+	width: 150px;
+	padding: 5px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: white;
+	background-color: #ff8c53;
+	font-size: 0.9em;
+	text-transform: uppercase;
+	border: 1px #ff8c53 hidden;
+}
+
+.applicant{
+	padding-left: 10px;
+	width: 20%;
+	float: right;
+}
+.applicant header h1{
+	padding-bottom: 4px;
+	border-bottom: 2px groove;
+}
+
+.applicant header input{
+	width: 100%;
+	padding: 5px;
+	height: 30px;
+	margin-top: 10px;
+
+}
+
+
+
+
+
+
 
 
