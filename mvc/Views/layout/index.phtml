@@ -2,16 +2,17 @@
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css"  href="http://<?=HOST."/".DIR_PROJECT."/public/"?>/css/style.css">
+	<link rel="stylesheet" type="text/css"  href="http://<?=HOST?>/<?=DIR_PROJECT?>/public/css/style.css">
 </head>
 <body>
-<section class="sidebar">
-	<?=$this->_helpers_menu?>
-</section>
-<section class="content">
-	<?=$this->_content?>
-</section>
-
+<div class="wrapper">
+	<section class="sidebar">
+		<?=$this->_helpers_menu?>
+	</section>
+	<section class="content">
+		<?=$this->_content?>
+	</section>
+</div>
 </body>
-<script type="text/javascript" src="<?=HOST?>/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/js/html5shiv.js"></script>
 </html>
