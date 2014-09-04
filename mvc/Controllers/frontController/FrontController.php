@@ -18,7 +18,12 @@
 
 			$this->setController(!empty($router[1]) ? ucfirst(strtolower($router[1]))."Controller" :
 				"IndexController");
+
+
+
 			$this->setAction(!empty($router[2]) ? strtolower($router[2]).'Action' : "indexAction");
+
+			$this->_checkSession($this->getController());
 
 			if( !empty($router[3]) ){
 				$paramsSlice = array_slice($router, 3);
@@ -43,6 +48,20 @@
 		protected function getConfig(){
 			$this->_setConfigBd(require_once "config_bd.php");
 			$this->_setConfigUrl(require_once "config_url.php");
+		}
+
+		private  function _checkSession($controller){
+			$sessionControllers = new SessionController();
+
+			foreach($sessionControllers->getControllers() as $key => $valueCntr){
+				if($controller === $valueCntr){
+					if(!isset($_SESSION['id'])){
+						header("Location: http://".HOST."/".DIR_PROJECT."/authorization/index");
+						exit;
+					}
+				}
+			}
+
 		}
 
 		public function getParams(){

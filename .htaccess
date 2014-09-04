@@ -1,6 +1,8 @@
 AddDefaultCharset utf-8
-RewriteEngine On
 
+php_value session.auto_start 1
+
+RewriteEngine On
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
 RewriteCond %{REQUEST_FILENAME} -s [OR]

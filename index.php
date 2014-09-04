@@ -1,13 +1,14 @@
 <?php
+
 	set_include_path( implode(PATH_SEPARATOR, [
 		'mvc/Controllers/frontController',
 		'mvc/Controllers/errorController',
+		'mvc/Controllers/sessionController',
 		'mvc/Controllers',
 		'mvc/Models',
 		'mvc/Views',
 		'config/'
 	]));
-
 
 	spl_autoload_register(function ($class) {
 		$file = $class . '.php';
@@ -17,7 +18,8 @@
 				throw new Exception('No page');
 		}catch (Exception $e){
 //			header('Location: '.HOST.'/error');
-			exit($class);
+			echo $e->getMessage();
+			exit($e->getMessage());
 		}
 	});
 

@@ -6,4 +6,8 @@ class IndexController extends IController {
 		return $view->render('index/index');
 	}
 
+	public function outAction(){
+		$this->sessionClear();
+	}
+
 } 

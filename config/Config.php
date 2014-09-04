@@ -8,7 +8,6 @@
 			define('DB_NAME', $config_bd['db_name']);
 			define('USER', $config_bd['user']);
 			define('PASSWORD', $config_bd['password']);
-			define('OPTIONS', $config_bd['options']);
 		}
 
 		protected  function _setConfigUrl($config_url){

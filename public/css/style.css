@@ -101,6 +101,18 @@ div.authorization{
 	background-color: white;
 
 }
+
+div.authorization h3{
+	margin: 0 auto;
+	margin-bottom: 40px;
+	color: red;
+	border: 2px red solid;
+	padding: 10px;
+	width: 70%;
+	font-size: 1.3em;
+	/*display: none;*/
+}
+
 .subform{
 	margin: 0 auto;
 	font-size: 1.2em;
@@ -118,7 +130,7 @@ div.authorization{
 	padding-bottom: 20px;
 }
 .authorization h1{
-	margin: 0 auto 50px;
+	margin: 0 auto 40px;
 	width: 400px;
 	border-bottom: 1px black dashed;
 	padding-top: 50px;
