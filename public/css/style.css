@@ -41,7 +41,7 @@ body{
 	font-size: 20px;
 	width: 1000px;
 	margin: 15px  auto;
-	background-color: rgba(90, 86, 15, 0.47);
+	background-color: rgba(255, 146, 50, 0.15);
 }
 .wrapper{
 	border-top: 15px #ff8c53 groove;
@@ -76,7 +76,7 @@ div.sidebar{
 }
 
 .profile{
-	margin-top: 10px;
+
 	width: 20%;
 	float: right;
 }
@@ -84,13 +84,6 @@ div.sidebar{
 .bid_management ul li{
 	list-style: none;
 	display: inline-block;
-}
-
-.bid_management ul li a{
-	text-decoration: none;
-	border-right: none;
-	padding: 10px;
-	border: 1px black dashed;
 }
 
 .clear{
@@ -104,7 +97,6 @@ div.sidebar{
 
 .profile ul a.out{
 	float: right;
-	letter-spacing: 1px;
 	text-align: center;
 	font-weight: bold;
 	color: white;
@@ -125,7 +117,7 @@ div.content{
 	height: 700px;
 	background-position: center;
 	margin: 0 auto;
-	background-image: url("../../../public/img/no_page.jpg");
+	background-image: url("http://localhost/helpdesk/public/img/no_page.jpg");
 	background-repeat: no-repeat;
 }
 div.authorization{
@@ -202,11 +194,32 @@ div.authorization h3{
 	border: 1px #ff8c53 hidden;
 }
 
+
+.bid_management{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.bid_management a{
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+	width: 50px;
+	padding: 5px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: white;
+	background-color: #ff8c53;
+	font-size: 0.6em;
+	text-transform: uppercase;
+	border: 1px #ff8c53 hidden;
+}
+
+
 /* bid */
 
 .form{
 	width: 100%;
-	margin-bottom: 60px;
 }
 
 .required{
@@ -214,6 +227,7 @@ div.authorization h3{
 	color: red;
 }
 .new_bid{
+	margin-bottom: 100px;
 	float: left;
 	width: 80%;
 	background-color: white;
@@ -242,8 +256,44 @@ div.authorization h3{
 	padding: 5px;
 }
 .bid{
+	padding: 10px;
 	margin-top: 10px;
+	border: 3px  double;
 }
+
+.req label, .req h1, .req  input[type='text']::-webkit-input-placeholder{
+	color:red;
+}
+
+
+
+.req label, .req h1, .req input[type='text']::-moz-placeholder{
+	color:red;
+}
+
+.req label, .req h1, .req label input[type='text']:-moz-placeholder{
+	color:red;
+}
+.req label, .req h1, .req input[type='text']:-ms-input-placeholder{
+	color:red;
+}
+
+
+.comments input[type='text']::-webkit-input-placeholder{
+	text-align: center;
+}
+
+.comments input[type='text']::-moz-placeholder{
+	text-align: center;
+}
+
+.comments input[type='text']:-moz-placeholder{
+	text-align: center;
+}
+.comments input[type='text']:-ms-input-placeholder{
+	text-align: center;
+}
+
 
 .statuss p{
 	margin-top: 20px;
@@ -264,9 +314,10 @@ div.authorization h3{
 	border-top: 2px groove;
 	border-bottom: 2px groove;
 	margin-top: 40px;
+	margin-bottom: 40px;
 	padding-left: 30px;
 	padding-top: 15px;
-	padding-bottom: 50px;
+	padding-bottom: 70px;
 }
 .file label{
 	text-align: right;
@@ -274,6 +325,7 @@ div.authorization h3{
 	width: 100px;
 	float: left;
 }
+
 
 .file .right_file{
 	margin-left: 30px;
@@ -317,10 +369,12 @@ div.authorization h3{
 }
 
 .applicant header{
+	margin-top: 15px;
 	margin-left: 10px;
 }
 .applicant header h1{
-	padding-bottom: 4px;
+	padding-left: 5px;
+	padding-bottom: 10px;
 	border-bottom: 2px groove;
 }
 

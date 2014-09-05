@@ -1,22 +1,22 @@
 <div class="form">
-	<form action="" method="post" class="form_action">
+	<form action="insert" method="post" class="form_action">
 		<div class="new_bid">
 			<header>
 				<h1>Новая заявка</h1>
 			</header>
 			<div class="bid">
-				<p>
+				<p<?=$data['name']['val']?>>
 					<label for="name">Название<span class="required">*</span></label>
-					<input type="text" id="name">
+					<input type="text" name="name" id="name" value='<?=$data['name']['name']?>' placeholder="название заявки">
 				</p>
-				<p>
-					<label for="description">Описание</label>
-					<input type="text" id="description">
+				<p<?=$data['description']['val']?>>
+					<label for="description">Описание<span class="required">*</span></label>
+					<input type="text" name="description" value='<?=$data['description']['name']?>' placeholder="описание заявки" id="description">
 				</p>
 				<div class="statuss">
 					<p>
 						<label for="status">Статус</label>
-						<select name="status" id="status">
+						<select name="status" id="status" disabled>
 							<option value="open">Открыта</option>
 							<option value="in_work">В работе</option>
 							<option value="close">Закрыта</option>
@@ -24,44 +24,44 @@
 						</select>
 					</p>
 					<p>
-						<label for="priority">Приоритет<span class="required">*</span></label>
+						<label for="priority">Приоритет</span></label>
 						<select name="priority" id="priority">
-							<option value="low">Низкий</option>
-							<option value="average">Средний</option>
-							<option value="high">Высокий</option>
-							<option value="critical">Критический</option>
+							<option value="low" <?php if($data['priority']['name'] === 'low')echo'selected'?>>Низкий</option>
+							<option value="average"  <?php if($data['priority']['name'] === 'average')echo'selected'?>>Средний</option>
+							<option value="high"  <?php if($data['priority']['name'] === 'high')echo'selected'?>>Высокий</option>
+							<option value="critical" <?php if($data['priority']['name'] === 'critical')echo'selected'?>>Критический</option>
 						</select>
 					</p>
 					<p>
-						<label for="topic">Срок<span class="required">*</span></label>
-						<input type="date" name="date">
+						<label for="date">Срок</label>
+						<input type="datetime-local" id="date" name="date">
 					</p>
 				</div>
 				<div class="file">
 					<label for="topic">Вложенные файлы:</label>
 					<div class="right_file">
-						<input type="file" name="file">
+						<input type="file" name="file" value="добавить файл">
 						<input type="file" name="screen">
 					</div>
 				</div>
 				<div class="comments">
 					<label for="comment">Добавить комментарий</label>
-					<input type="text" name="comment" id="comment">
+					<input type="text" name="comment"  id="comment" placeholder="напишите свой комментарий">
 				</div>
 				<div class="saveBid">
-					<input type="submit" value="сохранить">
+					<input type="submit" name="saveBid" value="сохранить">
 				</div>
 
 			</div>
 		</div>
 		<div class="applicant">
-			<header>
-				<h1>Заявитель</h1>
-				<input type="text">
+			<header<?=$data['applicant']['val']?>>
+				<h1>Заявитель<span class="required">*</span></h1>
+				<input type="text" name="applicant" value='<?=$data['applicant']['name']?>' placeholder="заявитель">
 			</header>
-			<header>
-				<h1>Исполнитель</h1>
-				<input type="text">
+			<header<?=$data['implementer']['val']?>>
+				<h1>Исполнитель<span class="required">*</span></h1>
+				<input type="text" name="implementer" value='<?=$data['implementer']['name']?>' placeholder="заявитель">
 			</header>
 		</div>
 	</form>

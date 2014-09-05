@@ -9,7 +9,7 @@
 			require_once dirname(__FILE__)."/controller/{$file}.phtml";
 			$this->_content = ob_get_clean();
 
-			if(!isset($data['helpers']) && $data['helpers'] !== false){
+			if(!isset($data['helpers'])){
 				ob_start();
 				require_once dirname(__FILE__)."/layout/helpers/helper_menu.phtml";
 				$this->_helpers_menu = ob_get_clean();
