@@ -261,20 +261,20 @@ div.authorization h3{
 	border: 3px  double;
 }
 
-.req label, .req h1, .req  input[type='text']::-webkit-input-placeholder{
+.req label, .req select , .req h1, .req  input[type='text']::-webkit-input-placeholder{
 	color:red;
 }
 
 
 
-.req label, .req h1, .req input[type='text']::-moz-placeholder{
+.req label, .req select, .req h1, .req input[type='text']::-moz-placeholder{
 	color:red;
 }
 
-.req label, .req h1, .req label input[type='text']:-moz-placeholder{
+.req label, .req select, .req h1, .req label input[type='text']:-moz-placeholder{
 	color:red;
 }
-.req label, .req h1, .req input[type='text']:-ms-input-placeholder{
+.req label, .req select,.req h1, .req input[type='text']:-ms-input-placeholder{
 	color:red;
 }
 

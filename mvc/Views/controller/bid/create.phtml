@@ -1,5 +1,6 @@
+<?php print_r($data) ?>
 <div class="form">
-	<form action="insert" method="post" class="form_action">
+	<form action="insert" method="post" class="form_action" enctype="multipart/form-data">
 		<div class="new_bid">
 			<header>
 				<h1>Новая заявка</h1>
@@ -14,7 +15,7 @@
 					<input type="text" name="description" value='<?=$data['description']['name']?>' placeholder="описание заявки" id="description">
 				</p>
 				<div class="statuss">
-					<p>
+					<p<?=$data['status']['val']?>>
 						<label for="status">Статус</label>
 						<select name="status" id="status" disabled>
 							<option value="open">Открыта</option>
@@ -23,7 +24,7 @@
 							<option value="canceled">Отменена</option>
 						</select>
 					</p>
-					<p>
+					<p<?=$data['priority']['val']?>>
 						<label for="priority">Приоритет</span></label>
 						<select name="priority" id="priority">
 							<option value="low" <?php if($data['priority']['name'] === 'low')echo'selected'?>>Низкий</option>
@@ -40,7 +41,8 @@
 				<div class="file">
 					<label for="topic">Вложенные файлы:</label>
 					<div class="right_file">
-						<input type="file" name="file" value="добавить файл">
+						<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+						<input type="file" name="file">
 						<input type="file" name="screen">
 					</div>
 				</div>
@@ -51,7 +53,6 @@
 				<div class="saveBid">
 					<input type="submit" name="saveBid" value="сохранить">
 				</div>
-
 			</div>
 		</div>
 		<div class="applicant">
