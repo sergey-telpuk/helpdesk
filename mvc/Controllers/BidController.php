@@ -1,13 +1,30 @@
 <?php
 	class BidController extends IController {
 
+		private $_file_types = [
+			'screen'=>['png', 'jpg', 'jpeg'],
+			'file'=>['doc', 'docx']
+		];
+
+		private $_move_file_dir = '/var/www/html/helpdesk/files';
+
 		public function createAction(){
 			$view = new View();
 			return $view->render('bid/create');
 		}
 
 		public function insertAction(){
+
 			if(isset($_POST['saveBid'])){
+
+				if(	isset($_FILES['file'])){
+					$this->_checkFile($_FILES['file']);
+				}
+
+				if(isset($_FILES['screen'])){
+					$this->_checkScreen($_FILES['screen']);
+				}
+
 				$inputs = $this->_checkForm($_POST);
 
 				foreach($inputs as $values){
@@ -27,8 +44,31 @@
 			}
 		}
 
+		private function _checkFile($file = null){
+			if(is_uploaded_file($file['tmp_name'])){
+				if(!is_null($file) && $file['error'] === 0){
+					if( in_array(substr(strrchr($file['name'], '.'), 1), $this->_file_types['file'])
+						&& $file['size'] < 20000000 ){
+						move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/{$file['name']}");
+					}
+				}
+			}
+		}
+
+		private function _checkScreen($screen = null){
+			if(is_uploaded_file($screen['tmp_name'])){
+				if(!is_null($screen) && $screen['error'] === 0){
+					if( in_array(substr(strrchr($screen['name'], '.'), 1), $this->_file_types['screen'])
+						&& $screen['size'] < 20000000 ){
+						move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/{$screen['name']}");
+					}
+				}
+			}
+		}
+
 		private function _checkForm($inputs){
 			$inputs['status'] = isset($inputs['status']) ? $inputs['status']: 'open';
+			$inputs['priority'] = isset($inputs['priority']) ? $inputs['priority']: 'low';
 
 			$mb_ucfirst = function ($str, $encoding='UTF-8'){
 				$str = mb_ereg_replace('^[\ ]+', '', $str);
