@@ -7,11 +7,11 @@
 			<div class="bid">
 				<p<?=$data['name']['val']?>>
 					<label for="name">Название<span class="required">*</span></label>
-					<input type="text" name="name" id="name" value='<?=$data['name']['name']?>' placeholder="название заявки">
+					<input type="text" name="name" id="name" value='<?=$data['name']['content']?>' placeholder="название заявки">
 				</p>
 				<p<?=$data['description']['val']?>>
 					<label for="description">Описание<span class="required">*</span></label>
-					<input type="text" name="description" value='<?=$data['description']['name']?>' placeholder="описание заявки" id="description">
+					<input type="text" name="description" value='<?=$data['description']['content']?>' placeholder="описание заявки" id="description">
 				</p>
 				<div class="statuss">
 					<p<?=$data['status']['val']?>>
@@ -26,10 +26,10 @@
 					<p<?=$data['priority']['val']?>>
 						<label for="priority">Приоритет</span></label>
 						<select name="priority" id="priority">
-							<option value="low" <?php if($data['priority']['name'] === 'low')echo'selected'?>>Низкий</option>
-							<option value="average"  <?php if($data['priority']['name'] === 'average')echo'selected'?>>Средний</option>
-							<option value="high"  <?php if($data['priority']['name'] === 'high')echo'selected'?>>Высокий</option>
-							<option value="critical" <?php if($data['priority']['name'] === 'critical')echo'selected'?>>Критический</option>
+							<option value="low" <?php if($data['priority']['content'] === 'low')echo'selected'?>>Низкий</option>
+							<option value="average"  <?php if($data['priority']['content'] === 'average')echo'selected'?>>Средний</option>
+							<option value="high"  <?php if($data['priority']['content'] === 'high')echo'selected'?>>Высокий</option>
+							<option value="critical" <?php if($data['priority']['content'] === 'critical')echo'selected'?>>Критический</option>
 						</select>
 					</p>
 					<p>
@@ -38,16 +38,23 @@
 					</p>
 				</div>
 				<div class="file">
-					<label for="topic">Вложенные файлы:</label>
+					<p for="topic">Вложенные файлы:</p>
 					<div class="right_file">
 						<input type="hidden" name="MAX_FILE_SIZE" value="20000000">
-						<input type="file" name="file">
-						<input type="file" name="screen">
+						<div class="type_file">
+							<label for="file"<?=$data['file']['val']?>>Загрузка файла</label>
+							<label for="screen"<?=$data['screen']['val']?>>Загрузка скриншота</label>
+						</div>
+						<div class="input_file">
+							<input  type="file" <?=$data['file']['val']?> name="file" id="file">
+							<input type="file" <?=$data['screen']['val']?> name="screen" id="screen">
+						</div>
 					</div>
 				</div>
 				<div class="comments">
 					<label for="comment">Добавить комментарий</label>
-					<input type="text" name="comment"  id="comment" placeholder="напишите свой комментарий">
+					<input type="text" name="comment"  id="comment" value="<?=$data['comment']['content']?>"
+					       placeholder="напишите свой комментарий">
 				</div>
 				<div class="saveBid">
 					<input type="submit" name="saveBid" value="сохранить">
@@ -57,11 +64,11 @@
 		<div class="applicant">
 			<header<?=$data['applicant']['val']?>>
 				<h1>Заявитель<span class="required">*</span></h1>
-				<input type="text" name="applicant" value='<?=$data['applicant']['name']?>' placeholder="заявитель">
+				<input type="text" name="applicant" value='<?=$data['applicant']['content']?>' placeholder="заявитель">
 			</header>
 			<header<?=$data['implementer']['val']?>>
 				<h1>Исполнитель<span class="required">*</span></h1>
-				<input type="text" name="implementer" value='<?=$data['implementer']['name']?>' placeholder="заявитель">
+				<input type="text" name="implementer" value='<?=$data['implementer']['content']?>' placeholder="заявитель">
 			</header>
 		</div>
 	</form>

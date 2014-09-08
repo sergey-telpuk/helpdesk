@@ -265,7 +265,9 @@ div.authorization h3{
 	color:red;
 }
 
-
+.req{
+	color: red;
+}
 
 .req label, .req select, .req h1, .req input[type='text']::-moz-placeholder{
 	color:red;
@@ -319,7 +321,9 @@ div.authorization h3{
 	padding-top: 15px;
 	padding-bottom: 70px;
 }
-.file label{
+
+.file p{
+	margin-top: 1px;
 	text-align: right;
 	display: block;
 	width: 100px;
@@ -332,6 +336,23 @@ div.authorization h3{
 	display: block;
 	float: left;
 }
+
+.right_file .type_file label{
+	font-size: 0.6em;
+	display: block;
+	float: left;
+	margin-left: 20px;
+	width: 250px;
+}
+.right_file .input_file input{
+	font-size: 0.5em;
+	display: block;
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
+	width: 250px;
+}
+
 .comments{
 	margin-top: 20px;
 	margin-bottom: 20px;

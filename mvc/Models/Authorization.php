@@ -11,7 +11,7 @@
 			$sql = "SELECT id, level_access FROM users WHERE login = :login AND password = :password";
 
 			$sth = $this->_dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$sth->execute(array(':login' => $login, ':password' => $password));
+			$sth->execute([':login' => $login, ':password' => $password]);
 
 			$user = $sth->fetch();
 

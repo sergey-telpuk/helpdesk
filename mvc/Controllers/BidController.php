@@ -1,12 +1,12 @@
 <?php
 	class BidController extends IController {
 
+		private $_move_file_dir = '/var/www/html/helpdesk/files';
+
 		private $_file_types = [
 			'screen'=>['png', 'jpg', 'jpeg'],
 			'file'=>['doc', 'docx']
 		];
-
-		private $_move_file_dir = '/var/www/html/helpdesk/files';
 
 		public function createAction(){
 			$view = new View();
@@ -17,15 +17,13 @@
 
 			if(isset($_POST['saveBid'])){
 
-				if(	isset($_FILES['file'])){
-					$this->_checkFile($_FILES['file']);
-				}
-
-				if(isset($_FILES['screen'])){
-					$this->_checkScreen($_FILES['screen']);
-				}
-
-				$inputs = $this->_checkForm($_POST);
+				$inputs = array_merge(
+					$this->_checkForm($_POST),
+					(isset($_FILES['file'])&&!empty($_FILES['file']['name']))?$this->_checkFile($_FILES['file'])
+						:['file'=>['val'=>false, 'content'=>null]],
+					(isset($_FILES['screen'])&&!empty($_FILES['screen']['name']))?$this->_checkScreen($_FILES['screen'])
+						:['screen'=>['val'=>false, 'content'=>null]]
+				);
 
 				foreach($inputs as $values){
 					if($values['val'] === " class='req'"){
@@ -36,39 +34,45 @@
 
 				$bid = new Bid();
 
-				//$bid
-
-
+				$bid->insertInputs($inputs);
 			}else{
 				$this->headerLocation('index');
 			}
 		}
 
+		private function _saveFile($file){
+			move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/file_doc/".
+				".".substr(strrchr($file['name'], '.'), 1));
+		}
+
+		private function _saveScreen($screen){
+			move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/images/".
+				".".substr(strrchr($screen['name'], '.'), 1));
+		}
+
 		private function _checkFile($file = null){
-			if(is_uploaded_file($file['tmp_name'])){
-				if(!is_null($file) && $file['error'] === 0){
-					if( in_array(substr(strrchr($file['name'], '.'), 1), $this->_file_types['file'])
-						&& $file['size'] < 20000000 ){
-						move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/{$file['name']}");
-					}
-				}
-			}
+			return
+				is_uploaded_file($file['tmp_name']) && $file['size'] < 20000000
+				&& !is_null($file) && $file['error'] === 0 ?
+					['file'=>['val' => false, 'content'=>$file['name']]] :
+					['file'=>['val' => " class='req'"]];
+
 		}
 
 		private function _checkScreen($screen = null){
-			if(is_uploaded_file($screen['tmp_name'])){
-				if(!is_null($screen) && $screen['error'] === 0){
-					if( in_array(substr(strrchr($screen['name'], '.'), 1), $this->_file_types['screen'])
-						&& $screen['size'] < 20000000 ){
-						move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/{$screen['name']}");
-					}
-				}
-			}
+			return
+				is_uploaded_file($screen['tmp_name']) && $screen['size'] < 20000000
+				&& !is_null($screen) && $screen['error'] === 0
+				&& in_array(substr(strrchr($screen['name'], '.'), 1), $this->_file_types['screen']) ?
+					['screen'=>['val' => false, 'content'=>$screen['name']]] :
+					['screen'=>['val' => " class='req'"]];
+
 		}
 
 		private function _checkForm($inputs){
 			$inputs['status'] = isset($inputs['status']) ? $inputs['status']: 'open';
 			$inputs['priority'] = isset($inputs['priority']) ? $inputs['priority']: 'low';
+			$inputs['comment'] = isset($inputs['comment']) ? $inputs['comment']  : "";
 
 			$mb_ucfirst = function ($str, $encoding='UTF-8'){
 				$str = mb_ereg_replace('^[\ ]+', '', $str);
@@ -114,13 +118,18 @@
 				mb_strtolower(strip_tags(trim($inputs['implementer'])), 'utf-8'));
 			$implementer_val = call_user_func($check_empty, $implementer);
 
+			$comment = call_user_func($mb_ucfirst,
+				mb_strtolower(strip_tags(trim($inputs['comment'])), 'utf-8'));
+			$comment_val = false;
+
 			return [
-				'name'=>['val' => $name_val, 'name'=>$name],
-				'description'=>['val' => $description_val, 'name'=>$description],
-				'applicant'=>['val'=>$applicant_val, 'name'=>$applicant],
-				'implementer'=>['val'=>$implementer_val, 'name'=>$implementer],
-				'priority'=>['val'=>$priority_val, 'name'=>$priority],
-				'status'=>['val'=>$status_val, 'name'=>$status]
+				'name'=>['val' => $name_val, 'content'=>$name],
+				'description'=>['val' => $description_val, 'content'=>$description],
+				'applicant'=>['val'=>$applicant_val, 'content'=>$applicant],
+				'implementer'=>['val'=>$implementer_val, 'content'=>$implementer],
+				'priority'=>['val'=>$priority_val, 'content'=>$priority],
+				'comment'=>['val'=>$comment_val, 'content'=>$comment],
+				'status'=>['val'=>$status_val, 'content'=>$status]
 			];
 
 
