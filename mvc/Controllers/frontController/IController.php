@@ -6,7 +6,11 @@
 
 		public function __construct(){
 			$fc = FrontController::getInstance();
-			$this->_params = $fc->getParams();
+			$this->setParams($fc->getParams());
+		}
+
+		public function setParams($params){
+			$this->_params = $params;
 		}
 
 		public function headerLocation($url = ""){

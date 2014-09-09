@@ -218,6 +218,8 @@ div.authorization h3{
 
 /* bid */
 
+
+
 .form{
 	width: 100%;
 }
@@ -235,9 +237,58 @@ div.authorization h3{
 	border: 1px #ff8c53 solid;
 }
 
+.file_img{
+	position: relative;
+	float: left;
+	width: 200px;
+}
+
+.file_img img{
+	width: 70px;
+	height: 70px;
+}
+
+.screen_update{
+	position: relative;
+	float: right;
+	width: 200px;
+}
+.screen_update img{
+	width: 70px;
+	height: 70px;
+}
+.change_file_img{
+	position: absolute;
+	top: 0;
+	left: 60px;
+}
+.change_screen_img{
+	position: absolute;
+	top: 0;
+	left: 60px;
+}
+.change_file_img input[type=file], .change_screen_img input[type=file]{
+	font-size: 0.5em;
+}
+
+
 .new_bid header{
 	margin-bottom: 10px;
 }
+
+.new_bid figure{
+	display: inline-block;
+}
+
+.new_bid figure img{
+	width: 40px;
+	height: 40px;
+}
+.new_bid h1.update{
+	display: inline-block;
+	margin-left: 10px;
+}
+
 
 .bid p{
 	margin-top: 10px;
@@ -363,6 +414,7 @@ div.authorization h3{
 	display: block;
 }
 .comments input{
+	padding: 20px;
 	margin-top: 10px;
 	width: 100%;
 	height: 60px;
@@ -370,8 +422,9 @@ div.authorization h3{
 }
 
 .saveBid input[type='submit']{
+	margin-left: 65%;
 	cursor: pointer;
-	width: 150px;
+	width: 250px;
 	padding: 5px;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -404,7 +457,6 @@ div.authorization h3{
 	padding: 5px;
 	height: 30px;
 	margin-top: 10px;
-
 }
 
 

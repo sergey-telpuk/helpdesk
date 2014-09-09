@@ -8,19 +8,23 @@
 		}
 
 		public function checkUser($login, $password){
-			$sql = "SELECT id, level_access FROM users WHERE login = :login AND password = :password";
+			try{
+				$sql = "SELECT id, level_access FROM users WHERE login = :login AND password = :password";
 
-			$sth = $this->_dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$sth->execute([':login' => $login, ':password' => $password]);
+				$sth = $this->_dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+				$sth->execute([':login' => $login, ':password' => $password]);
 
-			$user = $sth->fetch();
+				$user = $sth->fetch(PDO::FETCH_ASSOC);
 
-			if(empty($user)){
-				return false;
+				if(empty($user)){
+					return false;
+				}
+
+				$_SESSION['id'] = trim($user['id']);
+				$_SESSION['level_access'] = trim($user['level_access']);
+			}catch (PDOException $e){
+				$e->getMessage();
 			}
-
-			$_SESSION['id'] = trim($user['id']);
-			$_SESSION['level_access'] = trim($user['level_access']);
 
 			return true;
 

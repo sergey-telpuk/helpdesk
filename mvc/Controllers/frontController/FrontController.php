@@ -19,14 +19,12 @@
 			$this->setController(!empty($router[1]) ? ucfirst(strtolower($router[1]))."Controller" :
 				"IndexController");
 
-
-
 			$this->setAction(!empty($router[2]) ? strtolower($router[2]).'Action' : "indexAction");
 
 			$this->_checkSession($this->getController());
 
 			if( !empty($router[3]) ){
-				$paramsSlice = array_slice($router, 3);
+				$paramsSlice = array_slice($router, 2);
 				$params = array();
 
 				foreach($paramsSlice as $key => $value){

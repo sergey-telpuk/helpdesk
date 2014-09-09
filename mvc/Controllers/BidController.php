@@ -8,12 +8,77 @@
 			'file'=>['doc', 'docx']
 		];
 
+		private $_view, $_bid;
+
 		private $_id;
 
-		public function createAction(){
-			$view = new View();
-			return $view->render('bid/create');
+		function __construct(){
+			parent::__construct();
+			$this->_view = new View();
+			$this->_bid = new Bid();
 		}
+
+		public function updateAction(){
+			$this->_id = (int)$this->getParams()['id'];
+			if(isset($_POST['updateIdBid']) && $this->_id){
+				$inputs = array_merge(
+					['id'=>['content'=>$this->_id]],
+					$this->_checkForm($_POST),
+					(isset($_FILES['file'])&&!empty($_FILES['file']['name']))?$this->_checkFile($_FILES['file'])
+						:['file'=>['val'=>false, 'content'=>null]],
+					(isset($_FILES['screen'])&&!empty($_FILES['screen']['name']))?$this->_checkScreen($_FILES['screen'])
+						:['screen'=>['val'=>false, 'content'=>null]]
+				);
+
+				foreach($inputs as $values){
+					if($values['val'] === " class='req'"){
+						return $this->_view->render("bid/index", $inputs);
+					}
+				}
+
+				if($this->_bid->updateInputs($this->_id, $inputs)){
+					if(!empty($_FILES['file']['name'])){
+						$this->_saveFile($_FILES['file']);
+					}
+
+					if(!empty($_FILES['screen']['name'])){
+						$this->_saveScreen($_FILES['screen']);
+					}
+					$this->headerLocation("bid/index/id/{$this->_id}");
+				}else{
+					$this->headerLocation('error');
+				}
+			}else{
+				$this->headerLocation('error');
+			}
+
+		}
+
+		public function indexAction(){
+			$id_bid_inputs = $this->_bid->selectInputs((int)$this->getParams()['id']);
+			if($id_bid_inputs){
+				return $this->_view->render("bid/index", [
+					'id'=>['content'=>$id_bid_inputs['id']],
+					'name'=>['val' => false, 'content'=>$id_bid_inputs['name']],
+					'description'=>['val' => false, 'content'=>$id_bid_inputs['description']],
+					'applicant'=>['val'=>false, 'content'=>$id_bid_inputs['applicant']],
+					'implementer'=>['val'=>false, 'content'=>$id_bid_inputs['implementer']],
+					'priority'=>['val'=>false, 'content'=>$id_bid_inputs['priority']],
+					'comment'=>['val'=>false, 'content'=>$id_bid_inputs['comment']],
+					'date'=>['val'=>false, 'content'=>$id_bid_inputs['date']],
+					'status'=>['val'=>false, 'content'=>$id_bid_inputs['status']]
+				] );
+			}else{
+				$this->headerLocation('index');
+			}
+
+		}
+
+		public function createAction(){
+			return $this->_view->render('bid/create');
+		}
+
+
 
 		public function insertAction(){
 
@@ -29,36 +94,53 @@
 
 				foreach($inputs as $values){
 					if($values['val'] === " class='req'"){
-						$view = new View();
-						return $view->render('bid/create', $inputs);
+						return $this->_view->render('bid/create', $inputs);
 					}
 				}
 
-				$bid = new Bid();
-				$this->_id = $bid->insertInputs($inputs);
+				$this->_id = $this->_bid->insertInputs($inputs);
 
 				if($this->_id){
 					if(!empty($_FILES['file']['name'])){
 						$this->_saveFile($_FILES['file']);
 					}
 
-					if(!empty($_FILES['file']['name'])){
+					if(!empty($_FILES['screen']['name'])){
 						$this->_saveScreen($_FILES['screen']);
 					}
+					$this->headerLocation("bid/index");
+				}else{
+					$this->headerLocation('error');
 				}
 
 			}else{
-				$this->headerLocation('index');
+				$this->headerLocation('error');
 			}
 		}
 
 		private function _saveFile($file){
-			move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/file_doc/$this->_id".
+			$link = "$this->_move_file_dir/file_doc";
+			$files = scandir($link);
+
+			foreach($files as $file){
+				if(preg_match("/($this->_id)/", $file)){
+					unlink("$link/$file");
+				}
+			}
+			move_uploaded_file($file['tmp_name'], "$link/$this->_id".
 				".".substr(strrchr($file['name'], '.'), 1));
 		}
 
 		private function _saveScreen($screen){
-			move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/images/$this->_id".
+			$link = "$this->_move_file_dir/images";
+			$files = scandir($link);
+
+			foreach($files as $file){
+				if(preg_match("/($this->_id)/", $file)){
+					unlink("$link/$file");
+				}
+			}
+			move_uploaded_file($screen['tmp_name'], "$link/$this->_id".
 				".".substr(strrchr($screen['name'], '.'), 1));
 		}
 

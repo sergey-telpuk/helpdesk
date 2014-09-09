@@ -1,5 +1,6 @@
 <?php
 return [
 	'IndexController',
-	'BidController'
+	'BidController',
+	'ErrorController'
 ];

@@ -1,0 +1,82 @@
+<div class="new_bid">
+	<form action="../../update/id/<?=$data['id']['content']?>" method="post" class="form_action"
+	      enctype="multipart/form-data">
+		<header>
+			<figure>
+				<img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/update.png">
+			</figure>
+			<h1 class="update">Заявка # <?=$data['id']['content']?></h1>
+		</header>
+		<div class="bid">
+			<p<?=$data['name']['val']?>>
+				<label for="name">Название<span class="required">*</span></label>
+				<input type="text" name="name" id="name" value='<?=$data['name']['content']?>' placeholder="название заявки">
+			</p>
+			<p<?=$data['description']['val']?>>
+				<label for="description">Описание<span class="required">*</span></label>
+				<input type="text" name="description" value='<?=$data['description']['content']?>' placeholder="описание заявки" id="description">
+			</p>
+			<div class="statuss">
+				<p<?=$data['status']['val']?>>
+					<label for="status" >Статус</label>
+					<select name="status" id="status">
+						<option value="open" <?php if($data['status']['content'] === 'open')echo'selected'?>>Открыта</option>
+						<option value="in_work" <?php if($data['status']['content'] === 'in_work')echo'selected'?>>В работе</option>
+						<option value="close" <?php if($data['status']['content'] === 'close')echo'selected'?>>Закрыта</option>
+						<option value="canceled" <?php if($data['status']['content'] === 'canceled')echo'selected'?>>Отменена</option>
+					</select>
+				</p>
+				<p<?=$data['priority']['val']?>>
+					<label for="priority">Приоритет</span></label>
+					<select name="priority" id="priority">
+						<option value="low" <?php if($data['priority']['content'] === 'low')echo'selected'?>>Низкий</option>
+						<option value="average"  <?php if($data['priority']['content'] === 'average')echo'selected'?>>Средний</option>
+						<option value="high"  <?php if($data['priority']['content'] === 'high')echo'selected'?>>Высокий</option>
+						<option value="critical" <?php if($data['priority']['content'] === 'critical')echo'selected'?>>Критический</option>
+					</select>
+				</p>
+				<p<?=$data['date']['val']?>>
+					<label for="datetimepicker">Срок</label>
+					<input id="datetimepicker" name="date" type="text" <?=$data['date']['val']?>
+					       value='<?=$data['date']['content'] ? $data['date']['content']: date("d-m-Y H:00")?>'>
+				</p>
+			</div>
+			<div class="file">
+				<p for="topic">Вложенные файлы:</p>
+				<div class="right_file">
+					<div class="file_img">
+						<a href="#"><img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/file.png"></a>
+						<p class="change_file_img"><input type="file" <?=$data['file']['val']?> name="file"></p>
+
+					</div>
+					<div class="screen_update">
+						<img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/file.png">
+						<p class="change_screen_img"><input type="file" <?=$data['screen']['val']?> name="screen"></p>
+					</div>
+				</div>
+			</div>
+			<div class="comments">
+				<label for="comment">Добавить комментарий</label>
+				<input type="text" name="comment"  id="comment" value="<?=$data['comment']['content']?>"
+				       placeholder="напишите свой комментарий">
+			</div>
+			<div class="saveBid">
+				<input type="submit" name="updateIdBid" value="обновить заявку">
+			</div>
+		</div>
+</div>
+<div class="applicant">
+	<header<?=$data['applicant']['val']?>>
+		<h1>Заявитель<span class="required">*</span></h1>
+		<input type="text" name="applicant" value='<?=$data['applicant']['content']?>' placeholder="заявитель">
+	</header>
+	<header<?=$data['implementer']['val']?>>
+		<h1>Исполнитель<span class="required">*</span></h1>
+		<input type="text" name="implementer" value='<?=$data['implementer']['content']?>' placeholder="заявитель">
+	</header>
+</div>
+</form>
+</div>
+<div class="clear"></div>
+
+
