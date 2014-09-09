@@ -8,42 +8,42 @@
 		}
 
 		public function insertInputs($inputs){
-
-			print_r($inputs);
-			$sql = "INSERT INTO bid
+			try{
+				$sql = "INSERT INTO bid
 								(
 									name,
 									applicant,
 									implementer,
+									description,
 									status,
 									priority,
 									date,
-									file,
-									screen,
 									comment
 								) VALUES(
 									:name,
 									:applicant,
 									:implementer,
+									:description,
 									:status,
 									:priority,
 									:date,
-									:file,
-									:screen,
 									:comment)";
-			$sth = $this->_dbh->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$sth->execute([
-				':name' => $inputs['name']['content'],
-				':applicant' => $inputs['applicant']['content'],
-				':implementer'=>$inputs['implementer']['content'],
-				':status'=>$inputs['status']['content'],
-				':priority'=>$inputs['priority']['content'],
-				':date'=>$inputs['date']['content'],
-				':file'=>$inputs['file']['content'],
-				':screen'=>$inputs['screen']['content'],
-				':comment'=>$inputs['comment']['content']
-			]);
+				$sth = $this->_dbh->prepare($sql);
+				$sth->execute([
+					':name' => $inputs['name']['content'],
+					':applicant' => $inputs['applicant']['content'],
+					':implementer'=>$inputs['implementer']['content'],
+					':description'=>$inputs['description']['content'],
+					':status'=>$inputs['status']['content'],
+					':priority'=>$inputs['priority']['content'],
+					':date'=>$inputs['date']['content'],
+					':comment'=>$inputs['comment']['content']
+				]);
+			}catch (PDOException $e){
+				return false;
+			}
 
+			return $this->_dbh->lastInsertId();
 
 		}
 	}

@@ -32,9 +32,10 @@
 							<option value="critical" <?php if($data['priority']['content'] === 'critical')echo'selected'?>>Критический</option>
 						</select>
 					</p>
-					<p>
-						<label for="date">Срок</label>
-						<input type="datetime-local" id="date" name="date">
+					<p<?=$data['date']['val']?>>
+						<label for="datetimepicker">Срок</label>
+						<input id="datetimepicker" name="date" type="text" <?=$data['date']['val']?>
+						       value='<?=$data['date']['content'] ? $data['date']['content']: date("d-m-Y H:00")?>'>
 					</p>
 				</div>
 				<div class="file">

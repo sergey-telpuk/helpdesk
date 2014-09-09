@@ -8,6 +8,8 @@
 			'file'=>['doc', 'docx']
 		];
 
+		private $_id;
+
 		public function createAction(){
 			$view = new View();
 			return $view->render('bid/create');
@@ -33,20 +35,30 @@
 				}
 
 				$bid = new Bid();
+				$this->_id = $bid->insertInputs($inputs);
 
-				$bid->insertInputs($inputs);
+				if($this->_id){
+					if(!empty($_FILES['file']['name'])){
+						$this->_saveFile($_FILES['file']);
+					}
+
+					if(!empty($_FILES['file']['name'])){
+						$this->_saveScreen($_FILES['screen']);
+					}
+				}
+
 			}else{
 				$this->headerLocation('index');
 			}
 		}
 
 		private function _saveFile($file){
-			move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/file_doc/".
+			move_uploaded_file($file['tmp_name'], "$this->_move_file_dir/file_doc/$this->_id".
 				".".substr(strrchr($file['name'], '.'), 1));
 		}
 
 		private function _saveScreen($screen){
-			move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/images/".
+			move_uploaded_file($screen['tmp_name'], "$this->_move_file_dir/images/$this->_id".
 				".".substr(strrchr($screen['name'], '.'), 1));
 		}
 
@@ -70,9 +82,14 @@
 		}
 
 		private function _checkForm($inputs){
+			$inputs['name'] = isset($inputs['name']) ? $inputs['name']  : "";
+			$inputs['description'] = isset($inputs['description']) ? $inputs['description']  : "";
 			$inputs['status'] = isset($inputs['status']) ? $inputs['status']: 'open';
 			$inputs['priority'] = isset($inputs['priority']) ? $inputs['priority']: 'low';
+			$inputs['date'] = isset($inputs['date']) ? $inputs['date']: date("d-m-Y H:00");
 			$inputs['comment'] = isset($inputs['comment']) ? $inputs['comment']  : "";
+			$inputs['applicant'] = isset($inputs['applicant']) ? $inputs['applicant']  : "";
+			$inputs['implementer'] = isset($inputs['comment']) ? $inputs['implementer']  : "";
 
 			$mb_ucfirst = function ($str, $encoding='UTF-8'){
 				$str = mb_ereg_replace('^[\ ]+', '', $str);
@@ -93,6 +110,11 @@
 			$check_status = function($var){
 				$list_status = ['open', 'in_work', 'close', 'canceled'];
 				return in_array($var, $list_status) ? false: " class='req'";
+			};
+
+			$check_date = function($var){
+				$req = '/(\d{1,2}-\d{1,2}-\d{4} \d{1,2}:\d{1,2})/';
+				return preg_match($req, $var) ? false: " class='req'";
 			};
 
 
@@ -118,6 +140,9 @@
 				mb_strtolower(strip_tags(trim($inputs['implementer'])), 'utf-8'));
 			$implementer_val = call_user_func($check_empty, $implementer);
 
+			$date = strip_tags(trim($inputs['date']));
+			$date_val = call_user_func($check_date, $date);
+
 			$comment = call_user_func($mb_ucfirst,
 				mb_strtolower(strip_tags(trim($inputs['comment'])), 'utf-8'));
 			$comment_val = false;
@@ -129,6 +154,7 @@
 				'implementer'=>['val'=>$implementer_val, 'content'=>$implementer],
 				'priority'=>['val'=>$priority_val, 'content'=>$priority],
 				'comment'=>['val'=>$comment_val, 'content'=>$comment],
+				'date'=>['val'=>$date_val, 'content'=>$date],
 				'status'=>['val'=>$status_val, 'content'=>$status]
 			];
 
