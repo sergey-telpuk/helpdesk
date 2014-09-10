@@ -39,7 +39,7 @@ html{
 
 body{
 	font-size: 20px;
-	width: 1000px;
+	width: 1200px;
 	margin: 15px  auto;
 	background-color: rgba(255, 146, 50, 0.15);
 }
@@ -515,7 +515,6 @@ div.authorization h3{
 .applicant header select{
 	width: 100%;
 	padding: 5px;
-	height: 30px;
 	margin-top: 10px;
 }
 
@@ -546,10 +545,6 @@ div.authorization h3{
 	padding: 5px 0 0 20px;
 }
 
-
-
-
-
 .table_bids{
 	float: left;
 	width: 80%;
@@ -564,13 +559,13 @@ div.authorization h3{
 .table_bids table th{
 	text-align: left;
 	border: 1px black dotted;
-	padding: 10px;
+	padding: 5px;
 }
 
 .table_bids table td{
 	text-align: left;
 	border: 1px black dotted;
-	padding: 10px;
+	padding: 5px;
 }
 
 .table_bids table td:last-child{
