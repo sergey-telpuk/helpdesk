@@ -78,7 +78,7 @@
 					'name'=>['val' => false, 'content'=>$id_bid_inputs['name']],
 					'description'=>['val' => false, 'content'=>$id_bid_inputs['description']],
 					'applicant'=>['val'=>false, 'content'=>$id_bid_inputs['applicant']],
-					'implementer'=>['val'=>false, 'content'=>$id_bid_inputs['implementer']],
+					'implementer'=>['val'=>false, 'content'=>$id_bid_inputs['implementer'], 'options'=>$this->_bid->selectImplementer()],
 					'priority'=>['val'=>false, 'content'=>$id_bid_inputs['priority']],
 					'comment'=>['val'=>false, 'content'=>$id_bid_inputs['comment']],
 					'date'=>['val'=>false, 'content'=>$id_bid_inputs['date']],
@@ -116,7 +116,7 @@
 		}
 
 		public function createAction(){
-			return $this->_view->render('bid/create');
+			return $this->_view->render('bid/create', ['implementer'=>['options'=>$this->_bid->selectImplementer()]]);
 		}
 
 		private function _fileExists(){
@@ -260,6 +260,11 @@
 				return preg_match($req, $var) ? false: " class='req'";
 			};
 
+			$check_implementer = function($var){
+				$req = '/^[1-9]{1,2}$/';
+				return preg_match($req, $var) ? false: " class='req'";
+			};
+
 
 			$name = call_user_func($mb_ucfirst, mb_strtolower(strip_tags(trim($inputs['name'])), 'utf-8'));
 			$name_val = call_user_func($check_empty, $name);
@@ -279,9 +284,8 @@
 				mb_strtolower(strip_tags(trim($inputs['applicant'])), 'utf-8'));
 			$applicant_val = call_user_func($check_empty, $applicant);
 
-			$implementer = call_user_func($mb_ucfirst,
-				mb_strtolower(strip_tags(trim($inputs['implementer'])), 'utf-8'));
-			$implementer_val = call_user_func($check_empty, $implementer);
+			$implementer = strip_tags(trim($inputs['implementer']));
+			$implementer_val = call_user_func($check_implementer, $implementer);
 
 			$date = strip_tags(trim($inputs['date']));
 			$date_val = call_user_func($check_date, $date);
@@ -294,11 +298,11 @@
 				'name'=>['val' => $name_val, 'content'=>$name],
 				'description'=>['val' => $description_val, 'content'=>$description],
 				'applicant'=>['val'=>$applicant_val, 'content'=>$applicant],
-				'implementer'=>['val'=>$implementer_val, 'content'=>$implementer],
+				'implementer'=>['val'=>$implementer_val, 'content'=>$implementer, 'options'=>$this->_bid->selectImplementer()],
 				'priority'=>['val'=>$priority_val, 'content'=>$priority],
 				'comment'=>['val'=>$comment_val, 'content'=>$comment],
 				'date'=>['val'=>$date_val, 'content'=>$date],
-				'status'=>['val'=>$status_val, 'content'=>$status]
+				'status'=>['val'=>$status_val, 'content'=>$status],
 			];
 
 

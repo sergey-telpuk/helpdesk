@@ -83,7 +83,11 @@
 	</header>
 	<header<?=$data['implementer']['val']?>>
 		<h1>Исполнитель<span class="required">*</span></h1>
-		<input type="text" name="implementer" value='<?=$data['implementer']['content']?>' placeholder="заявитель">
+		<select name="implementer">
+			<?php foreach($data['implementer']['options'] as $key=>$value):?>
+				<option  value="<?=$value['id']?>" <?php if($value['id'] === $data['implementer']['content'])echo'selected'?>><?=$value['name']?></option>
+			<?php endforeach; ?>
+		</select>
 	</header>
 </div>
 </form>

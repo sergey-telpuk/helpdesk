@@ -107,6 +107,23 @@
 
 		}
 
+		public function selectImplementer(){
+			try{
+				$sql = "SELECT
+							id,
+							name
+						FROM
+							implementer ORDER BY id ASC";
+				$sth = $this->_dbh->query($sql);
+
+				return $sth->fetchAll(PDO::FETCH_ASSOC);
+
+			}catch (PDOException $e){
+				return false;
+			}
+		}
+
+
 		public function selectBids(){
 			try{
 				$sql = "SELECT
