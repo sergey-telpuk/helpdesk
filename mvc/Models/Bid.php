@@ -102,9 +102,27 @@
 				return true;
 
 			}catch (PDOException $e){
-				echo $e->getMessage();
+				return false;
 			}
 
+		}
+
+		public function selectBids(){
+			try{
+				$sql = "SELECT
+							id,
+							name,
+							status,
+							priority
+						FROM
+							bid ORDER BY id DESC ";
+				$sth = $this->_dbh->query($sql);
+
+				return $sth->fetchAll(PDO::FETCH_ASSOC);
+
+			}catch (PDOException $e){
+				return false;
+			}
 		}
 
 	}

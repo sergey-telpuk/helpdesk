@@ -24,6 +24,8 @@
 				$inputs = array_merge(
 					['id'=>['content'=>$this->_id]],
 					$this->_checkForm($_POST),
+					['file_E'=>$this->_fileExists()],
+					['screen_E'=>$this->_screenExists()],
 					(isset($_FILES['file'])&&!empty($_FILES['file']['name']))?$this->_checkFile($_FILES['file'])
 						:['file'=>['val'=>false, 'content'=>null]],
 					(isset($_FILES['screen'])&&!empty($_FILES['screen']['name']))?$this->_checkScreen($_FILES['screen'])
@@ -44,7 +46,7 @@
 					if(!empty($_FILES['screen']['name'])){
 						$this->_saveScreen($_FILES['screen']);
 					}
-					$this->headerLocation("bid/index/id/{$this->_id}");
+					$this->headerLocation("bid/index/id/{$this->_id}/update/true");
 				}else{
 					$this->headerLocation('error');
 				}
@@ -55,7 +57,21 @@
 		}
 
 		public function indexAction(){
-			$id_bid_inputs = $this->_bid->selectInputs((int)$this->getParams()['id']);
+			$params = $this->getParams();
+			$this->_id = (int)$params['id'];
+			$delete = $params['delete'];
+			$id_bid_inputs = $this->_bid->selectInputs($this->_id);
+
+			if($delete === 'file'){
+				$this->_deleteF();
+				$this->headerLocation("bid/index/id/{$this->_id}");
+			}
+
+			if($delete === 'screen'){
+				$this->_deleteS();
+				$this->headerLocation("bid/index/id/{$this->_id}");
+			}
+
 			if($id_bid_inputs){
 				return $this->_view->render("bid/index", [
 					'id'=>['content'=>$id_bid_inputs['id']],
@@ -66,7 +82,10 @@
 					'priority'=>['val'=>false, 'content'=>$id_bid_inputs['priority']],
 					'comment'=>['val'=>false, 'content'=>$id_bid_inputs['comment']],
 					'date'=>['val'=>false, 'content'=>$id_bid_inputs['date']],
-					'status'=>['val'=>false, 'content'=>$id_bid_inputs['status']]
+					'status'=>['val'=>false, 'content'=>$id_bid_inputs['status']],
+					'message'=>['content'=>$this->getParams()['update']],
+					'file_E'=>$this->_fileExists(),
+					'screen_E'=>$this->_screenExists()
 				] );
 			}else{
 				$this->headerLocation('index');
@@ -74,11 +93,54 @@
 
 		}
 
+		private function _deleteF(){
+			$link = "$this->_move_file_dir/file_doc";
+			$files = scandir($link);
+
+			foreach($files as $f){
+				if(preg_match("/($this->_id)/", $f)){
+					unlink("$link/$f");
+				}
+			}
+		}
+
+		private function  _deleteS(){
+			$link = "$this->_move_file_dir/images";
+			$files = scandir($link);
+
+			foreach($files as $file){
+				if(preg_match("/($this->_id)/", $file)){
+					unlink("$link/$file");
+				}
+			}
+		}
+
 		public function createAction(){
 			return $this->_view->render('bid/create');
 		}
 
+		private function _fileExists(){
+			$link = "$this->_move_file_dir/file_doc";
+			$files = scandir($link);
 
+			foreach($files as $f){
+				if(preg_match("/($this->_id)/", $f)){
+					return ['style'=>'block' ,'src'=>$f];
+				}
+			}
+			return ['style'=>'none' ,'src'=>false];
+		}
+
+		private function _screenExists(){
+			$link = "$this->_move_file_dir/images";
+			$files = scandir($link);
+			foreach($files as $f){
+				if(preg_match("/($this->_id)/", $f)){
+					return ['style'=>'block' ,'src'=>$f];
+				}
+			}
+			return ['style'=>'none' ,'src'=>false];
+		}
 
 		public function insertAction(){
 
@@ -119,16 +181,16 @@
 		}
 
 		private function _saveFile($file){
+
 			$link = "$this->_move_file_dir/file_doc";
 			$files = scandir($link);
 
-			foreach($files as $file){
-				if(preg_match("/($this->_id)/", $file)){
-					unlink("$link/$file");
+			foreach($files as $f){
+				if(preg_match("/($this->_id)/", $f)){
+					unlink("$link/$f");
 				}
 			}
-			move_uploaded_file($file['tmp_name'], "$link/$this->_id".
-				".".substr(strrchr($file['name'], '.'), 1));
+			move_uploaded_file($file['tmp_name'], "$link/$this->_id".".".substr(strrchr($file['name'], '.'), 1));
 		}
 
 		private function _saveScreen($screen){
@@ -140,8 +202,7 @@
 					unlink("$link/$file");
 				}
 			}
-			move_uploaded_file($screen['tmp_name'], "$link/$this->_id".
-				".".substr(strrchr($screen['name'], '.'), 1));
+			move_uploaded_file($screen['tmp_name'], "$link/$this->_id".".".substr(strrchr($screen['name'], '.'), 1));
 		}
 
 		private function _checkFile($file = null){

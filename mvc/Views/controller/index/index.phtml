@@ -1,7 +1,38 @@
-<div class="bid_management">
-	<ul>
-		<li><a href="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/create">Создать заявку</a></li>
-		<li><a href="">Удалить</a></li>
-	</ul>
+<div class="bids">
+	<div class="bid_management">
+		<ul>
+			<li><a href="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/create">Создать заявку</a></li>
+			<li><a href="">Удалить</a></li>
+		</ul>
+	</div>
+	<div class="filter">
+		<p>Мои фильтры</p>
+		<ul>
+			<li><a href="">В работе</a></li>
+			<li><a href="">Открытые</a></li>
+			<li><a href="">Просроченные</a></li>
+		</ul>
+	</div>
+	<div class="table_bids">
+		<table>
+			<tr>
+				<th><input type="checkbox"></th>
+				<th>№</th>
+				<th>Cт.</th>
+				<th>Пр.</th>
+				<th>Наименование заявки</th>
+			</tr>
+			<?php foreach($data['bids'] as $key => $bid ): ?>
+				<tr>
+					<td><input type="checkbox"></td>
+					<td><?=$bid['id']?></td>
+					<td><?=$bid['status']?></td>
+					<td><?=$bid['priority']?></td>
+					<td><a href="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/index/id/<?=$bid['id']?>"><?=$bid['name']?></a></td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
+	<div class="clear"></div>
 </div>
 

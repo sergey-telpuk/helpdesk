@@ -196,8 +196,8 @@ div.authorization h3{
 
 
 .bid_management{
-	margin-top: 20px;
-	margin-bottom: 40px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 .bid_management a{
@@ -238,34 +238,81 @@ div.authorization h3{
 }
 
 .file_img{
+	margin-left: 20px;
 	position: relative;
 	float: left;
 	width: 200px;
 }
 
 .file_img img{
-	width: 70px;
+	border: 1px black dashed;
+	width: 80px;
 	height: 70px;
+}
+
+.screen{
+	border: 1px black dashed;
+	margin-left: 70px;
+	margin-bottom: 20px;
+}
+
+.update_success{
+	display: none;
+	width: 400px;
+	background-color: rgba(70, 163, 59, 0.48);
+	float: right;
+	color: green;
+	margin-left: 100px;
+	padding: 5px;
+	font-weight: normal;
+	border: 2px green dashed;
+	text-align: center;
+}
+
+.delete_f{
+	text-align: center;
+	display: block;
+	width: 30px;
+	position: absolute;
+	top: -10px;
+	left: -40px;
+}
+.delete_f a{
+	color: red;
+	font-size: 0.7em;
+}
+
+.delete_s{
+	text-align: center;
+	display: block;
+	width: 30px;
+	position: absolute;
+	top: -10px;
+	left: 30px;
+}
+.delete_s a{
+	color: red;
+	font-size: 0.7em;
 }
 
 .screen_update{
 	position: relative;
 	float: right;
-	width: 200px;
+	width: 300px;
 }
 .screen_update img{
-	width: 70px;
+	width: 80px;
 	height: 70px;
 }
 .change_file_img{
 	position: absolute;
 	top: 0;
-	left: 60px;
+	left: 100px;
 }
 .change_screen_img{
 	position: absolute;
 	top: 0;
-	left: 60px;
+	left: 170px;
 }
 .change_file_img input[type=file], .change_screen_img input[type=file]{
 	font-size: 0.5em;
@@ -367,10 +414,10 @@ div.authorization h3{
 	border-top: 2px groove;
 	border-bottom: 2px groove;
 	margin-top: 40px;
-	margin-bottom: 40px;
+	margin-bottom: 70px;
 	padding-left: 30px;
-	padding-top: 15px;
-	padding-bottom: 70px;
+	padding-top: 30px;
+	padding-bottom: 100px;
 }
 
 .file p{
@@ -457,6 +504,62 @@ div.authorization h3{
 	padding: 5px;
 	height: 30px;
 	margin-top: 10px;
+}
+
+/*bids*/
+.bids{
+	margin-top: 10px;
+	width: 100%;
+	border: 1px black dashed;
+}
+.filter{
+	float: right;
+	width: 20%;
+	padding: 0px 10px 10px 10px;
+	border-left: 1px black dotted;
+}
+
+.filter p{
+	border-bottom: 1px black dotted;
+	padding: 0 5px 5px 5px;
+}
+.filter ul{
+	list-style: none;
+	padding: 0;
+}
+.filter ul li{
+	padding: 5px 0 0 20px;
+}
+
+
+
+
+
+.table_bids{
+	float: left;
+	width: 80%;
+	padding: 10px;
+}
+.table_bids table{
+	width: 100%;
+	border-top: 1px black solid;
+	border-left: 1px black solid;
+}
+
+.table_bids table th{
+	text-align: left;
+	border: 1px black dotted;
+	padding: 10px;
+}
+
+.table_bids table td{
+	text-align: left;
+	border: 1px black dotted;
+	padding: 10px;
+}
+
+.table_bids table td:last-child{
+	border-right: none;
 }
 
 

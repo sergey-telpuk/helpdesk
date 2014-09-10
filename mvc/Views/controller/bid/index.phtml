@@ -1,11 +1,14 @@
 <div class="new_bid">
-	<form action="../../update/id/<?=$data['id']['content']?>" method="post" class="form_action"
+	<form action="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/update/id/<?=$data['id']['content']?>" method="post"
+	      class="form_action"
 	      enctype="multipart/form-data">
 		<header>
 			<figure>
 				<img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/update.png">
 			</figure>
-			<h1 class="update">Заявка # <?=$data['id']['content']?></h1>
+			<h1 class="update">Заявка # <?=$data['id']['content']?><span
+					<?=$data['message']['content']?"style='display: block'":false?>class="update_success">Ваша заявка
+					обновлена!</span></h1>
 		</header>
 		<div class="bid">
 			<p<?=$data['name']['val']?>>
@@ -45,13 +48,21 @@
 				<p for="topic">Вложенные файлы:</p>
 				<div class="right_file">
 					<div class="file_img">
-						<a href="#"><img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/file.png"></a>
+						<a style='display: <?=$data['file_E']['style']?>'
+						   href="http://<?=HOST?>/<?=DIR_PROJECT?>/files/file_doc/<?=$data['file_E']['src']?>">
+							<img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/file.png"></a>
 						<p class="change_file_img"><input type="file" <?=$data['file']['val']?> name="file"></p>
-
+						<p class="delete_f" style='display: <?=$data['file_E']['style']?>'>
+							<a href="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/index/id/<?=$data['id']['content']?>/delete/file">удалить</a>
+						</p>
 					</div>
 					<div class="screen_update">
-						<img src="http://<?=HOST?>/<?=DIR_PROJECT?>/public/img/file.png">
+						<img class="screen" style='display: <?=$data['screen_E']['style']?>'
+						     src="http://<?=HOST?>/<?=DIR_PROJECT?>/files/images/<?=$data['screen_E']['src']?>">
 						<p class="change_screen_img"><input type="file" <?=$data['screen']['val']?> name="screen"></p>
+						<p class="delete_s" style='display: <?=$data['screen_E']['style']?>'>
+							<a  href="http://<?=HOST?>/<?=DIR_PROJECT?>/bid/index/id/<?=$data['id']['content']?>/delete/screen">удалить</a>
+						</p>
 					</div>
 				</div>
 			</div>
